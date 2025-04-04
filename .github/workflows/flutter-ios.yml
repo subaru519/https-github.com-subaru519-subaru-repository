@@ -1,0 +1,29 @@
+name: Build iOS App
+
+on:
+  push:
+    branches:
+      - main  # mainブランチにpushしたら実行
+
+jobs:
+  build:
+    runs-on: macos-latest  # iOSビルドなのでmacOSで実行
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v3
+
+      - name: Flutterのセットアップ
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'  # 必要なFlutterのバージョンを指定
+
+      - name: 依存関係をインストール
+        run: flutter pub get
+
+      - name: iOSビルド
+        run: |
+          cd ios
+          pod install
+          cd ..
+          flutter build ios --no-codesign
