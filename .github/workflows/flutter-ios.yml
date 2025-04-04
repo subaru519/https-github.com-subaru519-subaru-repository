@@ -18,15 +18,11 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: '3.7.5'  # 安定したバージョンを指定
 
-      # CocoaPodsのインストール（必要に応じて）
+      # CocoaPodsのインストール（iOSビルド用）
       - name: Install CocoaPods
         run: sudo gem install cocoapods
-
-      # プロジェクトのルートディレクトリに移動
-      - name: Navigate to project root
-        run: cd ${{ github.workspace }}
 
       # 依存関係のインストール
       - name: Install dependencies
