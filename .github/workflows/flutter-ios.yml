@@ -20,11 +20,7 @@ jobs:
         with:
           flutter-version: '3.7.5'
 
-      # Flutterプロジェクトのディレクトリに移動 (必要に応じてパスを修正)
-      - name: Move to Flutter project directory
-        run: cd path/to/your/flutter/project
-
-      # 依存関係のインストール
+      # Flutter依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
 
