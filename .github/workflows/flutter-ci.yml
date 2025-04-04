@@ -10,7 +10,7 @@ on:
 
 jobs:
   flutter:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 使用するOS（例：ubuntu-latest）
 
     steps:
     - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd ${{ github.workspace }}C:\Users\subar\uranai_app\.github\workflows # プロジェクトルートに移動
+        cd ${{ github.workspace }}  # リポジトリのルートに移動
         flutter pub get
 
     - name: Run tests
