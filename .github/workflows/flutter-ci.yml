@@ -1,0 +1,36 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main   # main ブランチに push された時に実行されます
+  pull_request:
+    branches:
+      - main   # main ブランチへの PR に対して実行されます
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 最新の Ubuntu 環境で実行
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # コードをチェックアウトする
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2  # Flutter SDK をインストール
+      with:
+        flutter-version: '3.7.5'  # 使用する Flutter のバージョン
+
+    - name: Install dependencies
+      run: flutter pub get  # プロジェクトの依存関係をインストール
+
+    - name: Run tests
+      run: flutter test  # テストを実行
+
+    - name: Build APK
+      run: flutter build apk --release  # Android アプリのビルド (必要に応じてコメントアウト)
+
+    - name: Build iOS app (optional)
+      run: flutter build ios --release  # iOS アプリのビルド (必要に応じてコメントアウト)
+      if: runner.os == 'macOS'  # macOS 環境でのみ実行されます
+
