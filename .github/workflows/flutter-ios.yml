@@ -18,15 +18,19 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.5'  # 安定したバージョンを指定
+          flutter-version: '3.7.5'
 
-      # CocoaPodsのインストール（iOSビルド用）
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
+      # Flutterプロジェクトのディレクトリに移動 (必要に応じてパスを修正)
+      - name: Move to Flutter project directory
+        run: cd path/to/your/flutter/project
 
       # 依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
+
+      # CocoaPodsのインストール（iOSビルド用）
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
 
       # iOSビルドの実行
       - name: Build iOS
