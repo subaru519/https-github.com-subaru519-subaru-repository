@@ -16,22 +16,24 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.5' # Flutterのバージョンを明示的に指定
+          flutter-version: '3.7.5'
 
       - name: Install dependencies
-        run: flutter pub get
-        working-directory: ./ # プロジェクトのルートディレクトリを指定
+        run: |
+          cd ${{ github.workspace }}  # プロジェクトのルートディレクトリに移動
+          flutter pub get
 
       - name: Clean Flutter project
-        run: flutter clean
-        working-directory: ./ # プロジェクトのルートディレクトリを指定
+        run: |
+          cd ${{ github.workspace }}  # プロジェクトのルートディレクトリに移動
+          flutter clean
 
       - name: Install CocoaPods dependencies
         run: |
-          cd ios
+          cd ${{ github.workspace }}/ios  # iOSディレクトリに移動
           pod install
-        working-directory: ./ # プロジェクトのルートディレクトリを指定
 
       - name: Build iOS
-        run: flutter build ios --release
-        working-directory: ./ # プロジェクトのルートディレクトリを指定
+        run: |
+          cd ${{ github.workspace }}  # プロジェクトのルートディレクトリに移動
+          flutter build ios --release
