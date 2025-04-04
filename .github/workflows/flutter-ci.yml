@@ -3,34 +3,29 @@ name: Flutter CI
 on:
   push:
     branches:
-      - main   # main ブランチに push された時に実行されます
+      - main
   pull_request:
     branches:
-      - main   # main ブランチへの PR に対して実行されます
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # 最新の Ubuntu 環境で実行
+  flutter:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3  # コードをチェックアウトする
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Set up Flutter
-      uses: subosito/flutter-action@v2  # Flutter SDK をインストール
+      uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.5'  # 使用する Flutter のバージョン
+        flutter-version: '3.7.5'
 
     - name: Install dependencies
-      run: flutter pub get  # プロジェクトの依存関係をインストール
+      run: |
+        cd ${{ github.workspace }}C:\Users\subar\uranai_app\.github\workflows # プロジェクトルートに移動
+        flutter pub get
 
     - name: Run tests
-      run: flutter test  # テストを実行
-
-    - name: Build APK
-      run: flutter build apk --release  # Android アプリのビルド (必要に応じてコメントアウト)
-
-    - name: Build iOS app (optional)
-      run: flutter build ios --release  # iOS アプリのビルド (必要に応じてコメントアウト)
-      if: runner.os == 'macOS'  # macOS 環境でのみ実行されます
-
+      run: |
+        flutter test
